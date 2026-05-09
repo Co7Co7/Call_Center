@@ -85,7 +85,7 @@ Call_Center/
 - NO commitear archivos > 25 MB
 - NO commitear datos sensibles, claves API, tokens, ni `.env`
 - NO mezcla cambios de distintos temas en un mismo commit
-- NO usar rutas absolutas tipo `C:\Users\PAOLA\...` → siempre rutas relativas o `pathlib`
+- NO usar rutas absolutas tipo `C:\Users\<nombre>\...` → siempre rutas relativas o `pathlib`
 - NO hardcodear nombres de columnas en múltiples sitios → centralizar en `src/`
 - NO subir archivos de checkpoint de Jupyter (`.ipynb_checkpoints/`)
 

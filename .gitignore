@@ -21,6 +21,17 @@ env/
 # Datos procesados grandes
 data/processed/*.parquet
 
+# Secretos y configuración local (NUNCA subir)
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+credentials.json
+
+# pre-commit cache
+.pre-commit-cache/
+
 # Herramientas
 .ruff_cache/
 .pytest_cache/
