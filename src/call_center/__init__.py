@@ -3,4 +3,5 @@
 Módulos:
     data_loader: carga del CSV crudo y procesado, constantes de columnas.
     cleaning: transformaciones de tipos y pipeline de limpieza completo.
+    metrics: cálculo de KPIs operativos (AHT, abandonment rate, SLA compliance).
 """
