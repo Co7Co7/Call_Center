@@ -45,18 +45,6 @@ Call_Center/
 
 ## Instalación
 
-Requiere Python 3.11+.
-
-```bash
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# Linux / macOS
-source .venv/bin/activate
-
-pip install -e ".[dev]"
-```
-
 ## Uso
 
 **Ejecutar el pipeline de limpieza** (genera `data/processed/call_center_clean.csv`):
