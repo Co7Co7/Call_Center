@@ -77,9 +77,16 @@ jupyter lab
 pytest tests/ -v
 ```
 
+**Regenerar el reporte HTML** (actualiza `index.html`):
+
+```bash
+python -m call_center.report
+```
+
 ## Notebooks
 
 | Notebook | Descripción |
 |---|---|
 | [01_eda.ipynb](notebooks/01_eda.ipynb) | EDA completo: KPIs, distribuciones, correlaciones, segmentación |
 | [02_cleaning.ipynb](notebooks/02_cleaning.ipynb) | Documenta cada transformación del pipeline de limpieza |
+| [03_analysis.ipynb](notebooks/03_analysis.ipynb) | Análisis profundo: series de tiempo, outliers, propuesta de SLA |
