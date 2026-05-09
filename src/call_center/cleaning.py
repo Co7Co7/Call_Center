@@ -8,9 +8,9 @@ from pathlib import Path
 import pandas as pd
 
 from call_center.data_loader import (
+    _DEFAULT_PROCESSED,
     CLEAN_COLS,
     RAW_COLS,
-    _DEFAULT_PROCESSED,
     load_raw,
 )
 
@@ -85,20 +85,24 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
 
     # 2. Renombrar columnas a snake_case
     rename_map = {
-        RAW_COLS["incoming"]:      CLEAN_COLS["incoming"],
-        RAW_COLS["answered"]:      CLEAN_COLS["answered"],
-        RAW_COLS["answer_rate"]:   CLEAN_COLS["answer_rate"],
-        RAW_COLS["abandoned"]:     CLEAN_COLS["abandoned"],
-        RAW_COLS["answer_speed"]:  CLEAN_COLS["answer_speed"],
+        RAW_COLS["incoming"]: CLEAN_COLS["incoming"],
+        RAW_COLS["answered"]: CLEAN_COLS["answered"],
+        RAW_COLS["answer_rate"]: CLEAN_COLS["answer_rate"],
+        RAW_COLS["abandoned"]: CLEAN_COLS["abandoned"],
+        RAW_COLS["answer_speed"]: CLEAN_COLS["answer_speed"],
         RAW_COLS["talk_duration"]: CLEAN_COLS["talk_duration"],
-        RAW_COLS["waiting_time"]:  CLEAN_COLS["waiting_time"],
+        RAW_COLS["waiting_time"]: CLEAN_COLS["waiting_time"],
         RAW_COLS["service_level"]: CLEAN_COLS["service_level"],
     }
     result = result.rename(columns=rename_map)
 
     # 3. Parsear porcentajes
-    result[CLEAN_COLS["answer_rate"]] = parse_percentage(result[CLEAN_COLS["answer_rate"]])
-    result[CLEAN_COLS["service_level"]] = parse_percentage(result[CLEAN_COLS["service_level"]])
+    result[CLEAN_COLS["answer_rate"]] = parse_percentage(
+        result[CLEAN_COLS["answer_rate"]]
+    )
+    result[CLEAN_COLS["service_level"]] = parse_percentage(
+        result[CLEAN_COLS["service_level"]]
+    )
 
     # 4. Parsear tiempos HH:MM:SS → segundos
     for key in ("answer_speed", "talk_duration", "waiting_time"):

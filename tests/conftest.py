@@ -1,11 +1,9 @@
 """Fixtures compartidas para toda la suite de tests."""
 
-import pytest
 import pandas as pd
-from pathlib import Path
-
-from call_center.data_loader import load_raw, load_clean
+import pytest
 from call_center.cleaning import clean
+from call_center.data_loader import load_raw
 
 
 @pytest.fixture(scope="session")
