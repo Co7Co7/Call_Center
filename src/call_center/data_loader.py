@@ -13,32 +13,36 @@ logger = logging.getLogger(__name__)
 
 # Columnas tal como vienen en el CSV crudo
 RAW_COLS = {
-    "index":          "Index",
-    "incoming":       "Incoming Calls",
-    "answered":       "Answered Calls",
-    "answer_rate":    "Answer Rate",
-    "abandoned":      "Abandoned Calls",
-    "answer_speed":   "Answer Speed (AVG)",
-    "talk_duration":  "Talk Duration (AVG)",
-    "waiting_time":   "Waiting Time (AVG)",
-    "service_level":  "Service Level (20 Seconds)",
+    "index": "Index",
+    "incoming": "Incoming Calls",
+    "answered": "Answered Calls",
+    "answer_rate": "Answer Rate",
+    "abandoned": "Abandoned Calls",
+    "answer_speed": "Answer Speed (AVG)",
+    "talk_duration": "Talk Duration (AVG)",
+    "waiting_time": "Waiting Time (AVG)",
+    "service_level": "Service Level (20 Seconds)",
 }
 
 # Columnas en el DataFrame limpio (snake_case, tipos correctos)
 CLEAN_COLS = {
-    "incoming":       "incoming_calls",
-    "answered":       "answered_calls",
-    "answer_rate":    "answer_rate",        # float [0, 1]
-    "abandoned":      "abandoned_calls",
-    "answer_speed":   "answer_speed_avg_s", # int, segundos
-    "talk_duration":  "talk_duration_avg_s",
-    "waiting_time":   "waiting_time_avg_s",
-    "service_level":  "service_level_20s",  # float [0, 1]
+    "incoming": "incoming_calls",
+    "answered": "answered_calls",
+    "answer_rate": "answer_rate",  # float [0, 1]
+    "abandoned": "abandoned_calls",
+    "answer_speed": "answer_speed_avg_s",  # int, segundos
+    "talk_duration": "talk_duration_avg_s",
+    "waiting_time": "waiting_time_avg_s",
+    "service_level": "service_level_20s",  # float [0, 1]
 }
 
 # Ruta por defecto al CSV crudo (relativa a la raíz del repo)
-_DEFAULT_RAW = Path(__file__).parent.parent.parent / "data" / "raw" / "Call Center Data.csv"
-_DEFAULT_PROCESSED = Path(__file__).parent.parent.parent / "data" / "processed" / "call_center_clean.csv"
+_DEFAULT_RAW = (
+    Path(__file__).parent.parent.parent / "data" / "raw" / "Call Center Data.csv"
+)
+_DEFAULT_PROCESSED = (
+    Path(__file__).parent.parent.parent / "data" / "processed" / "call_center_clean.csv"
+)
 
 
 def load_raw(path: Path | str | None = None) -> pd.DataFrame:
@@ -59,7 +63,12 @@ def load_raw(path: Path | str | None = None) -> pd.DataFrame:
         raise FileNotFoundError(f"CSV no encontrado: {csv_path}")
 
     df = pd.read_csv(csv_path, sep=";")
-    logger.info("CSV cargado: %d filas, %d columnas — %s", len(df), len(df.columns), csv_path.name)
+    logger.info(
+        "CSV cargado: %d filas, %d columnas — %s",
+        len(df),
+        len(df.columns),
+        csv_path.name,
+    )
     return df
 
 

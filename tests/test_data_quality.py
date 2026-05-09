@@ -5,15 +5,13 @@ provienen del reporte R original (index.html) y sirven para verificar que
 el pipeline Python reproduce los mismos resultados.
 """
 
-import pytest
 import pandas as pd
-
 from call_center.data_loader import CLEAN_COLS
-
 
 # ---------------------------------------------------------------------------
 # Estructura del dataset
 # ---------------------------------------------------------------------------
+
 
 def test_row_count(df_clean: pd.DataFrame) -> None:
     assert len(df_clean) == 1251
@@ -35,6 +33,7 @@ def test_column_names(df_clean: pd.DataFrame) -> None:
 # ---------------------------------------------------------------------------
 # Tipos de datos
 # ---------------------------------------------------------------------------
+
 
 def test_integer_columns(df_clean: pd.DataFrame) -> None:
     int_cols = [
@@ -58,6 +57,7 @@ def test_float_columns(df_clean: pd.DataFrame) -> None:
 # ---------------------------------------------------------------------------
 # Rangos válidos
 # ---------------------------------------------------------------------------
+
 
 def test_answer_rate_range(df_clean: pd.DataFrame) -> None:
     col = CLEAN_COLS["answer_rate"]
@@ -85,6 +85,7 @@ def test_call_counts_non_negative(df_clean: pd.DataFrame) -> None:
 # Invariantes del negocio
 # ---------------------------------------------------------------------------
 
+
 def test_answered_le_incoming(df_clean: pd.DataFrame) -> None:
     """No puede haber más llamadas respondidas que entrantes."""
     assert (df_clean[CLEAN_COLS["answered"]] <= df_clean[CLEAN_COLS["incoming"]]).all()
@@ -109,6 +110,7 @@ def test_answered_plus_abandoned_eq_incoming(df_clean: pd.DataFrame) -> None:
 # Reproducibilidad de métricas clave (vs reporte R original)
 # ---------------------------------------------------------------------------
 
+
 def test_answer_rate_mean(df_clean: pd.DataFrame) -> None:
     """Answer Rate promedio debe ser ~92.7% (±1pp)."""
     mean = df_clean[CLEAN_COLS["answer_rate"]].mean()
@@ -123,5 +125,9 @@ def test_service_level_mean(df_clean: pd.DataFrame) -> None:
 
 def test_waiting_abandoned_correlation(df_clean: pd.DataFrame) -> None:
     """Correlación Waiting Time / Abandoned debe ser ~0.72 (±0.05)."""
-    r = df_clean[[CLEAN_COLS["waiting_time"], CLEAN_COLS["abandoned"]]].corr().iloc[0, 1]
+    r = (
+        df_clean[[CLEAN_COLS["waiting_time"], CLEAN_COLS["abandoned"]]]
+        .corr()
+        .iloc[0, 1]
+    )
     assert abs(r - 0.72) < 0.05, f"Correlación waiting/abandoned: {r:.3f}"
