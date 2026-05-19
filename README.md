@@ -3,6 +3,8 @@
 Análisis exploratorio de métricas operativas de un call center sobre 1,251 registros periódicos.
 Proyecto de portafolio que demuestra pipeline de datos reproducible, EDA y validación de calidad.
 
+Dashboard: https://co7co7.github.io/Call_Center/
+
 ## Hallazgos principales
 
 | Métrica | Valor | Referencia | Estado |
